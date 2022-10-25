@@ -385,8 +385,6 @@ def random_forests():
     calc_bias_variance_and_error(predictions_500, data_test["label"])  
     
      
-random_forest()
-
 def run(run_random_forest, run_random_forests, run_build_500_bagged_trees, run_bagged_tree_with_bias):
 
     if run_random_forest == "True":
@@ -406,4 +404,4 @@ def run(run_random_forest, run_random_forests, run_build_500_bagged_trees, run_b
         bagged_tree_with_bias()
 
 
-#run(run_random_forest=sys.argv[1], run_random_forests=sys.argv[2], run_build_500_bagged_trees=sys.argv[3], run_bagged_tree_with_bias=sys.argv[4])
+run(run_random_forest=sys.argv[1], run_random_forests=sys.argv[2], run_build_500_bagged_trees=sys.argv[3], run_bagged_tree_with_bias=sys.argv[4])
