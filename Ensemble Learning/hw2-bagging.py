@@ -338,8 +338,6 @@ def random_forest():
             total_error_ig.append(error)
             test_error, test_predictions = calc_predictions_for_bias_and_variance(tree, data_test)
             total_error_ig_test.append(test_error)
-            if i%50 == 0:
-                print("evaluating tree ", i, datetime.datetime.now())
             
             if i == 0:
                 predictions_1[index] = test_predictions   
@@ -356,24 +354,24 @@ def random_forest():
         print("Random Forest Error Test for feature count", j, total_error_ig_test)
         
         data_test["labelno_count"] = np.zeros(data_test.shape[0])
-        data_test["labelyes_count"] = np.zeros(data_test.shape[0])      
+        data_test["labelyes_count"] = np.zeros(data_test.shape[0])    
+
+
 
 def random_forests():
     data, data_test = load_data()
 
-    forests_to_make = 100
-    trees_per_forest = 500
-    predictions_1 = np.zeros((forests_to_make, len(data_test)))
-    predictions_500 = np.zeros((forests_to_make, len(data_test)))
+    predictions_1 = np.zeros((100, len(data_test)))
+    predictions_500 = np.zeros((100, len(data_test)))
 
-    for index in range(0, forests_to_make):
+    for index in range(0, 100):
         total_error_ig = []
         total_error_ig_test = []
         data_test["labelno_count"] = np.zeros(data_test.shape[0])
         data_test["labelyes_count"] = np.zeros(data_test.shape[0]) 
         print("evaluating forest ", index, datetime.datetime.now())
 
-        for i in range(0, trees_per_forest) : #how many trees to create
+        for i in range(0, 500) : #how many trees to create
             sample = data.sample(frac=.2, replace=True).reset_index(drop=True)
             tree = decision_tree_random_forest(sample, "", len(sample.columns)-3, 0, leaves_with_unknown_as_val,4)
             error, predictions = calc_predictions_for_bias_and_variance(tree, data)
@@ -384,7 +382,7 @@ def random_forests():
             if i == 0:
                 predictions_1[index] = test_predictions   
 
-            if i == trees_per_forest-1:
+            if i == 499:
                 predictions_500[index] = test_predictions
 
 
@@ -392,7 +390,6 @@ def random_forests():
     calc_bias_variance_and_error(predictions_1, data_test["label"])
     print("bagged trees")    
     calc_bias_variance_and_error(predictions_500, data_test["label"])  
-    print("len data, data_test, error, error_test", len(data), len(data_test), len(total_error_ig), len(total_error_ig_test))  
     
      
 
