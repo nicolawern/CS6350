@@ -8,7 +8,7 @@ To run the Decision Tree code please download all files and run run.sh. If you w
 The output is an array of the incorrect labels/total labels from tree depth 1-6 for cars and 1-17 for bank. The average error is also printed for both test and train and all calculations. 
 
 HW2 - Ensemble
-To run the Ensemble Learning code please download all files in the folder and call run.sh. If you want to replace the train/test please make sure they are named the same as the train/test files in the repository. Please set options True or False for each component. Option 1 is run_adaboost, Option 2 is run random forest creation, Option 3 for run random forests with bias and variance (VERY LONG RUNNING), Option 4 for building bagged trees, Option 5 for run bagged tree with bias and variance (VERY LONG RUNNING). 
+To run the Ensemble Learning code please download all files in the folder and call run.sh. If you want to replace the train/test please make sure they are named the same as the train/test files in the repository. Please set options True or False for each component. Option 1 is run_adaboost, Option 2 is run random forest creation, Option 3 for run random forests with bias and variance (VERY LONG RUNNING), Option 4 for building bagged trees, Option 5 for run bagged tree with bias and variance (VERY LONG RUNNING). Options 1, 2, 4 output a graph of errors from 0-500 iterations of the algorithm while 3 and 5 output bias, variance and GSE for forests of 100 trees on either their first or 500th iteration. 
 Eg: sh run.sh True True True True True
 
 HW2 - Linear Regression
