@@ -336,31 +336,21 @@ def random_forest():
 
     feature_count = [2,4,6]
 
-    predictions_1 = np.zeros((3, len(data_test)))
-    predictions_500 = np.zeros((3, len(data_test)))
-
     for index, j in enumerate(feature_count):
         total_error_ig = []
         total_error_ig_test = []
         for i in range(0, 500) : #how many trees to create
             sample = data.sample(frac=.6, replace=True).reset_index(drop=True)
             tree = decision_tree_random_forest(sample, "", len(sample.columns)-3, 0, leaves_with_unknown_as_val,j)
-            error, predictions = calc_predictions_for_bias_and_variance(tree, data)
+            error = calc_error(tree, data)
             total_error_ig.append(error)
-            test_error, test_predictions = calc_predictions_for_bias_and_variance(tree, data_test)
+            test_error = calc_error(tree, data_test)
             total_error_ig_test.append(test_error)
             
-            if i == 0:
-                predictions_1[index] = test_predictions   
-
-            if i == 499:
-                predictions_500[index] = test_predictions
-  
         print("Random Forest Error for feature count", j, total_error_ig)
         print("Random Forest Error Test for feature count", j, total_error_ig_test)
         plot_from_array(total_error_ig, total_error_ig_test, "Train Error", "Test Error", "Train and Test Error For 0-500 Trees Random Feature Count: ", j)
 
-        
         data_test["labelno_count"] = np.zeros(data_test.shape[0])
         data_test["labelyes_count"] = np.zeros(data_test.shape[0])    
 
@@ -373,8 +363,6 @@ def random_forests():
     predictions_500 = np.zeros((100, len(data_test)))
 
     for index in range(0, 100):
-        total_error_ig = []
-        total_error_ig_test = []
         data_test["labelno_count"] = np.zeros(data_test.shape[0])
         data_test["labelyes_count"] = np.zeros(data_test.shape[0]) 
         print("evaluating forest ", index, datetime.datetime.now())
@@ -382,10 +370,7 @@ def random_forests():
         for i in range(0, 500) : #how many trees to create
             sample = data.sample(frac=.2, replace=True).reset_index(drop=True)
             tree = decision_tree_random_forest(sample, "", len(sample.columns)-3, 0, leaves_with_unknown_as_val,4)
-            error, predictions = calc_predictions_for_bias_and_variance(tree, data)
-            total_error_ig.append(error)
-            test_error, test_predictions = calc_predictions_for_bias_and_variance(tree, data_test)
-            total_error_ig_test.append(test_error)
+            test_predictions = calc_predictions_for_bias_and_variance(tree, data_test)
             
             if i == 0:
                 predictions_1[index] = test_predictions   
@@ -400,7 +385,7 @@ def random_forests():
     calc_bias_variance_and_error(predictions_500, data_test["label"])  
     
      
-
+random_forest()
 
 def run(run_random_forest, run_random_forests, run_build_500_bagged_trees, run_bagged_tree_with_bias):
 
@@ -421,4 +406,4 @@ def run(run_random_forest, run_random_forests, run_build_500_bagged_trees, run_b
         bagged_tree_with_bias()
 
 
-run(run_random_forest=sys.argv[1], run_random_forests=sys.argv[2], run_build_500_bagged_trees=sys.argv[3], run_bagged_tree_with_bias=sys.argv[4])
+#run(run_random_forest=sys.argv[1], run_random_forests=sys.argv[2], run_build_500_bagged_trees=sys.argv[3], run_bagged_tree_with_bias=sys.argv[4])
