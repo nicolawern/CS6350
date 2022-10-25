@@ -7,7 +7,17 @@ import numpy as np
 import random
 import datetime
 import sys
+import matplotlib.pyplot as plt
 
+
+def plot_from_array(line1, line2, label1, label2, title):
+    plt.plot(np.asarray(line1), label=label1)
+    plt.plot(np.asarray(line2), label=label2)
+    plt.title(title)
+    plt.xlabel("Trees")
+    plt.ylabel("Error")
+    plt.legend()
+    plt.show()
 
 def calc_entropy(S):
     labels = S.label.unique()
@@ -287,6 +297,7 @@ def build_500_bagged_trees():
 
     print("Information Gain Error", total_error)
     print("Information Gain Error Test", total_error_test)
+    plot_from_array(total_error, total_error_test, "Train Error", "Test Error", "Error With 0-500 Bagged Trees")
 
 
 def bagged_tree_with_bias():
@@ -344,14 +355,11 @@ def random_forest():
 
             if i == 499:
                 predictions_500[index] = test_predictions
-
-
-        print("first tree")
-        calc_bias_variance_and_error(predictions_1, data_test["label"])
-        print("bagged trees")    
-        calc_bias_variance_and_error(predictions_500, data_test["label"])  
+  
         print("Random Forest Error for feature count", j, total_error_ig)
         print("Random Forest Error Test for feature count", j, total_error_ig_test)
+        plot_from_array(total_error_ig, total_error_ig_test, "Train Error", "Test Error", "Train and Test Error For 0-500 Trees Random Feature Count: ", j)
+
         
         data_test["labelno_count"] = np.zeros(data_test.shape[0])
         data_test["labelyes_count"] = np.zeros(data_test.shape[0])    
@@ -413,4 +421,4 @@ def run(run_random_forest, run_random_forests, run_build_500_bagged_trees, run_b
         bagged_tree_with_bias()
 
 
-run(run_random_forest=sys.argv[1], run_random_forests=sys.argv[2], run_build_500_bagged_trees=sys.argv[3], run_bagged_tree_with_bias=sys.argv[4],)
+run(run_random_forest=sys.argv[1], run_random_forests=sys.argv[2], run_build_500_bagged_trees=sys.argv[3], run_bagged_tree_with_bias=sys.argv[4])
