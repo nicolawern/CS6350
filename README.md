@@ -15,3 +15,5 @@ HW2 - Linear Regression
 To run the Linear Regression code please download all files in the folder and run run.sh with option 1=True to run batch gradient descent and 2=True to run stochastic gradient descent. Set to False for either to not run them. They will each output a plot of the cost fn, the learning rate that lead to convergence, the final weight vector, and the calculated test error based on weights at train convergence. If you want to replace the train/test for please make sure they are named the same as the train/test files in the repository.
 Eg: sh run.sh True True
 
+HW3 - Perceptron
+run.sh will run all 3 versions of Perceptron with T=10 and print the average error and final weights. To use different test/train files please name the replacements the same as the test/train in the repo.
