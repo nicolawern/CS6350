@@ -1,1 +1,0 @@
-Call run.sh with three paramaters - each being True or False. 1st input is for primal, second for dual, and third for dual Gaussian.
