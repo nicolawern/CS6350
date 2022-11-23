@@ -17,3 +17,6 @@ Eg: sh run.sh True True
 
 HW3 - Perceptron
 run.sh will run all 3 versions of Perceptron with T=10 and print the average error and final weights. To use different test/train files please name the replacements the same as the test/train in the repo.
+
+HW4 - SVM
+Call run.sh with three paramaters - each being True or False. 1st input is for primal, second for dual, and third for dual Gaussian.
