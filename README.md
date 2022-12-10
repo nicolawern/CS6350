@@ -20,3 +20,6 @@ run.sh will run all 3 versions of Perceptron with T=10 and print the average err
 
 HW4 - SVM
 Call run.sh with three paramaters - each being True or False. 1st input is for primal, second for dual, and third for dual Gaussian.
+
+HW5 - Back Prop
+Call run.sh with three paramaters - each being True or False. 1st input is for print partial, second for run backprop, and third for run pytorch.
